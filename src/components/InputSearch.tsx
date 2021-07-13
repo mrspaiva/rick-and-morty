@@ -2,9 +2,6 @@ import { useState } from 'react'
 import styled from 'styled-components'
 import { FiSearch } from 'react-icons/fi'
 
-// interface Props {
-//   preventDefault: () => void
-// }
 
 const Container = styled.form`
   width: 20rem;
@@ -45,20 +42,25 @@ const Button = styled.button`
   }
 `
 
-const Search = () => {
-  const [text, setText] = useState('')
+interface Props {
+  preventDefault: () => void
+}
 
-  // function handleChange(event) {
-  //   event.preventDefault()
-  // }
+
+const Search = () => {
+  const [searchCharacter, setSearchCharacter] = useState('')
+
+  function handleChange(event: Props ) {
+    event.preventDefault()
+  }
 
   return (
-      <Container>
+      <Container onSubmit={handleChange}>
         <Input 
         type="text" 
         placeholder="Digite um personagem"
-        value={text}
-        // onChange={(event) => setText(event.target.value)}
+        value={searchCharacter}
+        onChange={(event) => setSearchCharacter(event.target.value)}
         />
 
         <Button type="submit">
