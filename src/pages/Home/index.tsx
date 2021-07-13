@@ -8,11 +8,11 @@ const Home: React.FC = () => {
   return (
     <Container>
       <Background src={background}/>s
-      <Next>
-        <Link to="/showdata">
+      <Link to="/showdata">
+        <Next>
           <FiArrowRight color="#000" size={25}/>
-        </Link>
-      </Next>
+        </Next>
+      </Link>
     </Container>
   );
 }
