@@ -63,36 +63,55 @@ const FavoriteButton = styled.button`
   }
 `
 
-const Card: React.FC = () => {
-  const [favorite, setFavorite] = useState(false)
+interface LocationData {
+  name: string;
+}
+interface originData {
+  name: string;
+}
+interface CharacterData {
+  id: number;
+  name: string;
+  image: string;
+  status: string;
+  species: string;
+  location: LocationData;
+  origin: originData;
+}
+interface Props {
+  character: CharacterData;
+}
+
+const Card: React.FC<Props> = ({character}) => {
+  const [isFavorite, setIsFavorite] = useState(false)
 
   function handleFavorite() {
-    setFavorite(!favorite)
+    setIsFavorite(!isFavorite)
   }
 
   return (
     <Container>
-      <ImageCharacter src="https://rickandmortyapi.com/api/character/avatar/97.jpeg"/>
+      <ImageCharacter src={character.image}/>
       <InfoCharacter>
 
         <InfoSection>
-          <NameCharacter>Gonorrhea</NameCharacter>
-          <StatusCharacter>Dead - Disease</StatusCharacter>
+          <NameCharacter>{character.name}</NameCharacter>
+          <StatusCharacter>{character.status} - {character.species}</StatusCharacter>
         </InfoSection>
 
         <InfoSection>
           <LocationTitle>Último lugar conhecido: </LocationTitle>
-          <LocationName>Anatomy Park</LocationName>
+          <LocationName>{character.location.name}</LocationName>
         </InfoSection>
 
         <InfoSection>
           <LocationTitle>Visto pela primeira vez em: </LocationTitle>
-          <LocationName>Anatomy Park</LocationName>
+          <LocationName>{character.origin.name}</LocationName>
         </InfoSection>
       </InfoCharacter>
 
       <FavoriteButton onClick={handleFavorite}>
-       {!favorite ? (
+       {!isFavorite ? (
         <FiStar size={25} color="#ff0"/>
         ):(
         <FiStar size={25} fill="#ff0" color="#ff0"/>
