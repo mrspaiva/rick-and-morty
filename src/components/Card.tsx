@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import styled from 'styled-components'
-import { FiStar } from 'react-icons/fi';
+import { useState } from "react";
+import styled from "styled-components";
+import { FiStar } from "react-icons/fi";
 
 const Container = styled.div`
   display: flex;
@@ -9,43 +9,42 @@ const Container = styled.div`
   background-color: #3c3e44;
   border-radius: 0.5rem;
   margin-top: 4rem;
-`
+`;
 
 const ImageCharacter = styled.img`
   width: 14rem;
   border-top-left-radius: 0.5rem;
   border-bottom-left-radius: 0.5rem;
   margin-right: 1.5rem;
-`
+`;
 
 const InfoCharacter = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-`
+`;
 
 const InfoSection = styled.div`
   display: flex;
   flex-direction: column;
-`
+`;
 
 const NameCharacter = styled.h2`
   color: #fff;
-`
+`;
 
 const StatusCharacter = styled.span`
   color: #fff;
-
-`
+`;
 
 const LocationTitle = styled.span`
   color: #9e9e9e;
-`
+`;
 
 const LocationName = styled.span`
   color: #f5f5f5;
-`
+`;
 
 const FavoriteButton = styled.button`
   display: flex;
@@ -61,7 +60,7 @@ const FavoriteButton = styled.button`
   &:hover {
     opacity: 0.6;
   }
-`
+`;
 
 interface LocationData {
   name: string;
@@ -82,21 +81,22 @@ interface Props {
   character: CharacterData;
 }
 
-const Card: React.FC<Props> = ({character}) => {
-  const [isFavorite, setIsFavorite] = useState(false)
+const Card: React.FC<Props> = ({ character }) => {
+  const [isFavorite, setIsFavorite] = useState(false);
 
   function handleFavorite() {
-    setIsFavorite(!isFavorite)
+    setIsFavorite(!isFavorite);
   }
 
   return (
     <Container>
-      <ImageCharacter src={character.image}/>
+      <ImageCharacter src={character.image} />
       <InfoCharacter>
-
         <InfoSection>
           <NameCharacter>{character.name}</NameCharacter>
-          <StatusCharacter>{character.status} - {character.species}</StatusCharacter>
+          <StatusCharacter>
+            {character.status} - {character.species}
+          </StatusCharacter>
         </InfoSection>
 
         <InfoSection>
@@ -111,14 +111,14 @@ const Card: React.FC<Props> = ({character}) => {
       </InfoCharacter>
 
       <FavoriteButton onClick={handleFavorite}>
-       {!isFavorite ? (
-        <FiStar size={25} color="#ff0"/>
-        ):(
-        <FiStar size={25} fill="#ff0" color="#ff0"/>
+        {!isFavorite ? (
+          <FiStar size={25} color="#ff0" />
+        ) : (
+          <FiStar size={25} fill="#ff0" color="#ff0" />
         )}
-      </FavoriteButton>  
+      </FavoriteButton>
     </Container>
-  )
-}
+  );
+};
 
 export default Card;

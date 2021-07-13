@@ -1,14 +1,13 @@
-import { useState } from 'react'
-import styled from 'styled-components'
-import { FiSearch } from 'react-icons/fi'
-
+import { useState } from "react";
+import styled from "styled-components";
+import { FiSearch } from "react-icons/fi";
 
 const Container = styled.form`
   width: 20rem;
   height: 3rem;
   display: flex;
   border-bottom: 1px solid #333;
-`
+`;
 const Input = styled.input`
   width: 15rem;
   height: 2rem;
@@ -21,7 +20,7 @@ const Input = styled.input`
 
   display: flex;
   align-self: center;
-`
+`;
 
 const Button = styled.button`
   display: flex;
@@ -36,38 +35,37 @@ const Button = styled.button`
   &:hover {
     background-color: #e4d9d9;
   }
-  svg{
+  svg {
     width: 4rem;
     height: 2rem;
   }
-`
+`;
 
 interface Props {
-  preventDefault: () => void
+  preventDefault: () => void;
 }
 
-
 const Search = () => {
-  const [searchCharacter, setSearchCharacter] = useState('')
+  const [searchCharacter, setSearchCharacter] = useState("");
 
-  function handleChange(event: Props ) {
-    event.preventDefault()
+  function handleChange(event: Props) {
+    event.preventDefault();
   }
 
   return (
-      <Container onSubmit={handleChange}>
-        <Input 
-        type="text" 
+    <Container onSubmit={handleChange}>
+      <Input
+        type="text"
         placeholder="Digite um personagem"
         value={searchCharacter}
         onChange={(event) => setSearchCharacter(event.target.value)}
-        />
+      />
 
-        <Button type="submit">
-          <FiSearch color='#000'/>
-        </Button>
-      </Container>
-  )
-}
+      <Button type="submit">
+        <FiSearch color="#000" />
+      </Button>
+    </Container>
+  );
+};
 
 export default Search;

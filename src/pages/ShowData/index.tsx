@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import InputSearch from '../../components/InputSearch'
-import Card from '../../components/Card'
-import api from '../../services/api'
-import { Container, Title, CardSection } from './styles';
+import { useEffect, useState } from "react";
+import InputSearch from "../../components/InputSearch";
+import Card from "../../components/Card";
+import api from "../../services/api";
+import { Container, Title, CardSection } from "./styles";
 
 interface LocationData {
   name: string;
@@ -20,27 +20,27 @@ interface CharacterData {
   origin: originData;
 }
 
-const ShowData: React.FC<CharacterData> = (id) => {
-  const [characterList, setCharacterList] = useState([])
-  const [isloading, setIsLoading] = useState(false)
+const ShowData: React.FC<CharacterData> = () => {
+  const [characterList, setCharacterList] = useState([]);
+  const [isloading, setIsLoading] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
-      try{ 
-        setIsLoading(true)
-        console.log('true')
-        const { data } = await api.get('/character')
-        setCharacterList(data.results)
+      try {
+        setIsLoading(true);
+        console.log("true");
+        const { data } = await api.get("/character");
+        setCharacterList(data.results);
       } catch {
-        setIsLoading(false)
-        console.log('false')
+        setIsLoading(false);
+        console.log("false");
       }
     }
-    fetchData()
-  },[])
+    fetchData();
+  }, []);
 
   function loading() {
-   return <h1>loading</h1>
+    return <h1>loading</h1>;
   }
 
   return (
@@ -48,20 +48,16 @@ const ShowData: React.FC<CharacterData> = (id) => {
       <Title>Personagens</Title>
       <InputSearch />
       {!isloading ? (
-        loading() 
-      ):(
+        loading()
+      ) : (
         <CardSection>
-        {characterList.map((character, key) => (
-          <Card 
-          key={key}
-          character={character}
-          />
-        ))}
-      </CardSection>
+          {characterList.map((character, key) => (
+            <Card key={key} character={character} />
+          ))}
+        </CardSection>
       )}
-      
     </Container>
-  )
-}
+  );
+};
 
 export default ShowData;
