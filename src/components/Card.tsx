@@ -8,7 +8,7 @@ const Container = styled.div`
   height: 13.75rem;
   background-color: #3c3e44;
   border-radius: 0.5rem;
-  margin-top: 4rem;
+  margin-bottom: 4rem;
 `;
 
 const ImageCharacter = styled.img`
