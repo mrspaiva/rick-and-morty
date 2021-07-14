@@ -6,7 +6,6 @@ import api from "../../services/api";
 import Navbar from "../../components/Navbar";
 import {
   Container,
-  Title,
   CardSection,
   SelectionContent,
   SelectionContentText,
@@ -15,23 +14,23 @@ import {
 } from "./styles";
 
 interface LocationData {
-  name: string;
+  name?: string;
 }
 interface originData {
-  name: string;
+  name?: string;
 }
 interface CharacterData {
   id?: number;
-  name: string;
-  image: string;
-  status: string;
-  species: string;
+  name?: string;
+  image?: string;
+  status?: string;
+  species?: string;
   location: LocationData;
   origin: originData;
 }
 
-const ShowData: React.FC<CharacterData> = () => {
-  const [characterList, setCharacterList] = useState([]);
+const ShowData: React.FC<CharacterData> = (name) => {
+  const [characterList, setCharacterList] = useState<CharacterData[]>([]);
   const [isloading, setIsLoading] = useState(false);
   const [searchCharacter, setSearchCharacter] = useState("");
 
@@ -54,13 +53,26 @@ const ShowData: React.FC<CharacterData> = () => {
     return <Spinner name="ball-triangle-path" fadeIn="none" color="#000" />;
   }
 
+  function showSearchReturn(names: any) {
+    const newSearch: any = characterList.map((list, key) => {
+      return list.name === names ? (
+        <Card key={key} character={list} />
+      ) : (
+        // eslint-disable-next-line no-alert
+        alert("Nenhum personagem com esse nome")
+      );
+    });
+    setSearchCharacter("");
+    setCharacterList(newSearch);
+  }
+
   return (
     <Container>
       <NavbarContainer>
         <Navbar />
       </NavbarContainer>
-      <Title>Personagens</Title>
       <InputSearch
+        handleChange={() => showSearchReturn}
         searchCharacter={searchCharacter}
         setSearchCharacter={setSearchCharacter}
       />
