@@ -8,7 +8,7 @@ const Container = styled.div`
   height: 13.75rem;
   background-color: #3c3e44;
   border-radius: 0.5rem;
-  margin-bottom: 4rem;
+  margin-bottom: 2.5rem;
 `;
 
 const ImageCharacter = styled.img`
@@ -63,25 +63,26 @@ const FavoriteButton = styled.button`
 `;
 
 interface LocationData {
-  name: string;
+  name?: string;
 }
 interface originData {
-  name: string;
+  name?: string;
 }
 interface CharacterData {
-  id: number;
-  name: string;
-  image: string;
-  status: string;
-  species: string;
+  id?: number;
+  name?: string;
+  image?: string;
+  status?: string;
+  species?: string;
   location: LocationData;
   origin: originData;
 }
 interface Props {
-  character: CharacterData;
+  character?: CharacterData;
+  name?: string;
 }
 
-const Card: React.FC<Props> = ({ character }) => {
+const Card: React.FC<Props> = ({ character, name }) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
   function handleFavorite() {
@@ -90,23 +91,23 @@ const Card: React.FC<Props> = ({ character }) => {
 
   return (
     <Container>
-      <ImageCharacter src={character.image} />
+      <ImageCharacter src={character?.image} />
       <InfoCharacter>
         <InfoSection>
-          <NameCharacter>{character.name}</NameCharacter>
+          <NameCharacter>{character?.name}</NameCharacter>
           <StatusCharacter>
-            {character.status} - {character.species}
+            {character?.status} - {character?.species}
           </StatusCharacter>
         </InfoSection>
 
         <InfoSection>
           <LocationTitle>Último lugar conhecido: </LocationTitle>
-          <LocationName>{character.location.name}</LocationName>
+          <LocationName>{character?.location.name}</LocationName>
         </InfoSection>
 
         <InfoSection>
           <LocationTitle>Visto pela primeira vez em: </LocationTitle>
-          <LocationName>{character.origin.name}</LocationName>
+          <LocationName>{character?.origin.name}</LocationName>
         </InfoSection>
       </InfoCharacter>
 
