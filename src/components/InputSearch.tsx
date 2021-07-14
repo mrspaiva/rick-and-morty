@@ -44,13 +44,15 @@ const Button = styled.button`
 interface Props {
   searchCharacter: string;
   setSearchCharacter: any;
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  handleChange: any;
 }
 
-const Search: React.FC<Props> = ({ searchCharacter, setSearchCharacter }) => {
-  function handleChange(event: { preventDefault: () => void }) {
-    event.preventDefault();
-  }
-
+const Search: React.FC<Props> = ({
+  searchCharacter,
+  setSearchCharacter,
+  handleChange,
+}) => {
   return (
     <Container onSubmit={handleChange}>
       <Input
