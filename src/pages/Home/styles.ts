@@ -10,6 +10,7 @@ export const Background = styled.img`
   width: 100%;
   height: 100%;
   transform: scaleX(-1);
+  position: relative;
 `;
 
 export const Next = styled.div`
@@ -30,4 +31,13 @@ export const Next = styled.div`
   &:hover {
     opacity: 0.8;
   }
+`;
+
+export const Logo = styled.img`
+  display: flex;
+  align-self: flex-end;
+  width: 20rem;
+  position: absolute;
+  right: 3rem;
+  top: 3rem;
 `;
