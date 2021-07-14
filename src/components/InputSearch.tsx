@@ -42,13 +42,12 @@ const Button = styled.button`
 `;
 
 interface Props {
-  preventDefault: () => void;
+  searchCharacter: string;
+  setSearchCharacter: any;
 }
 
-const Search = () => {
-  const [searchCharacter, setSearchCharacter] = useState("");
-
-  function handleChange(event: Props) {
+const Search: React.FC<Props> = ({ searchCharacter, setSearchCharacter }) => {
+  function handleChange(event: { preventDefault: () => void }) {
     event.preventDefault();
   }
 
