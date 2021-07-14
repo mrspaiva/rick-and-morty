@@ -1,8 +1,18 @@
 import { useEffect, useState } from "react";
+import Spinner from "react-spinkit";
 import InputSearch from "../../components/InputSearch";
 import Card from "../../components/Card";
 import api from "../../services/api";
-import { Container, Title, CardSection } from "./styles";
+import Navbar from "../../components/Navbar";
+import {
+  Container,
+  Title,
+  CardSection,
+  SelectionContent,
+  SelectionContentText,
+  SelectionButton,
+  NavbarContainer,
+} from "./styles";
 
 interface LocationData {
   name: string;
@@ -23,37 +33,53 @@ interface CharacterData {
 const ShowData: React.FC<CharacterData> = () => {
   const [characterList, setCharacterList] = useState([]);
   const [isloading, setIsLoading] = useState(false);
+  const [searchCharacter, setSearchCharacter] = useState("");
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        setIsLoading(true);
-        console.log("true");
-        const { data } = await api.get("/character");
-        setCharacterList(data.results);
-      } catch {
-        setIsLoading(false);
-        console.log("false");
+    setTimeout(() => {
+      async function fetchData() {
+        try {
+          setIsLoading(true);
+          const { data } = await api.get("/character");
+          setCharacterList(data.results);
+        } catch {
+          setIsLoading(false);
+        }
       }
-    }
-    fetchData();
+      fetchData();
+    }, 2000);
   }, []);
 
   function loading() {
-    return <h1>loading</h1>;
+    return <Spinner name="ball-triangle-path" fadeIn="none" color="#000" />;
   }
 
   return (
     <Container>
+      <NavbarContainer>
+        <Navbar />
+      </NavbarContainer>
       <Title>Personagens</Title>
-      <InputSearch />
+      <InputSearch
+        searchCharacter={searchCharacter}
+        setSearchCharacter={setSearchCharacter}
+      />
+      <SelectionContent>
+        <SelectionButton>
+          <SelectionContentText>Todos</SelectionContentText>
+        </SelectionButton>
+        <SelectionButton>
+          <SelectionContentText>Favoritos</SelectionContentText>
+        </SelectionButton>
+      </SelectionContent>
       {!isloading ? (
         loading()
       ) : (
         <CardSection>
-          {characterList.map((character, key) => (
-            <Card key={key} character={character} />
-          ))}
+          {searchCharacter ||
+            characterList.map((character, key) => (
+              <Card key={key} character={character} />
+            ))}
         </CardSection>
       )}
     </Container>
